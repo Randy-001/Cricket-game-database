@@ -1,18 +1,15 @@
 package com.example.CricketgameDatabase.model;
 
-import javax.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.util.List;
 
-@Entity
+@Document(collection = "Overs")
 public class Overs {
     @Id
-    @Column(updatable=false,nullable=false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int oversId;
-    @Column(updatable=false)
     private int oversNo;
-    @OneToMany(cascade = CascadeType.ALL )
-    @JoinColumn
     private List<BallInfo> balls;
 
     public int getOversNo() {

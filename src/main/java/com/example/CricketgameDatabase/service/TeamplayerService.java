@@ -1,27 +1,35 @@
 package com.example.CricketgameDatabase.service;
 
+import com.example.CricketgameDatabase.model.Match;
+import com.example.CricketgameDatabase.model.PlayingTeam;
+import com.example.CricketgameDatabase.model.Team;
 import com.example.CricketgameDatabase.model.TeamPlayer;
+import com.example.CricketgameDatabase.repository.MatchRepository;
 import com.example.CricketgameDatabase.repository.TeamPlayerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TeamplayerService {
     @Autowired
-    private TeamPlayerRepository teamplayerrepository;
+    private MatchRepository matchRepository;
 
-    public void updateRuns(int playerId, int uptoruns) {
-        this.teamplayerrepository.updateRuns(playerId,uptoruns);
-    }
+    public TeamPlayer findByIdAndMatchId(int playerId, int matchId) {
+        Match m = this.matchRepository.findPlayer(playerId,matchId);
+        System.out.println(m);
+        for(PlayingTeam p : m.getPlayingTeams())
+        {
+            for(TeamPlayer t : p.getTeamPlayer())
+            {
+                if(t.getPlayer().getPlayerId()==playerId)
+                {
+                    return t;
+                }
+            }
+        }
 
-    public void updateWickets(int playerId) {
-        System.out.println(playerId);
-        int w =this.teamplayerrepository.findWickets(playerId);
-        w++;
-        this.teamplayerrepository.updateWickets(playerId,w);
-    }
-
-    public TeamPlayer findByIdAndMatchId(int id, int matchid) {
-        return this.teamplayerrepository.findByIdAndMatchId(id,matchid);
+        return null;
     }
 }

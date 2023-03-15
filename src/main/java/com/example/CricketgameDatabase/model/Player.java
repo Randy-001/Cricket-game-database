@@ -1,21 +1,24 @@
 package com.example.CricketgameDatabase.model;
 
-import javax.persistence.*;
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
+
+@Document(collection = "Player")
 public class Player {
+
+    @Transient
+    public final static String PLAYER_SEQUENCE="lastPlayerId";
     @Id
-    @Column(updatable=false,nullable=false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int playerId;
-    @Column(updatable=false)
+
     private String playerName;
-    @Column(updatable=false)
+
     private Boolean isBatsman;
-    @Column(updatable=false)
+
     private Boolean isBowler;
-
-
 
 
     public String getPlayerName() {

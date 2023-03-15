@@ -1,40 +1,27 @@
 package com.example.CricketgameDatabase.model;
 
 
-import javax.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Entity
+@Document(collection = "Match")
 //@Table(schema = "postgres")
 public class Match {
+    @Transient
+    public final static String MATCH_SEQUENCE="lastMatchId";
     @Id
-    @Column(updatable=false,nullable=false)
-
     private int matchId;
-
-
-
-
-    @ManyToMany
-    @JoinTable(
-            name = "matchesPlayed",
-            joinColumns = @JoinColumn(name = "matchId"),
-            inverseJoinColumns = @JoinColumn(name = "teamId"))
+    @DBRef
     private List<Team> teams;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="scoreBoard")
     private Scoreboard scoreBoard;
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn
     private List<Innings> innings;
-
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="matchId")
     private List<PlayingTeam> playingTeams;
-
-    @Column(updatable = false)
     private int overs;
     private int batting;
 

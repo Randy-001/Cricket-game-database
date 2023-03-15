@@ -1,20 +1,15 @@
 package com.example.CricketgameDatabase.model;
 
-import javax.persistence.*;
 
-@Entity
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document
 public class Scoreboard {
     @Id
-    @Column(updatable=false,nullable=false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int scoreboardId;
-
-    @OneToOne
     private PlayingTeam winner;
-
-    @Column(updatable=false)
     private int target;
-    @Column(updatable=false)
     private boolean isDraw;
 
     public int getTarget() {

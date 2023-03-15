@@ -1,25 +1,19 @@
 package com.example.CricketgameDatabase.model;
 
-import javax.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
 
+
+
+@Document(collection = "BallInfo")
 public class BallInfo {
     @Id
-    @Column(updatable=false,nullable=false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ballId;
-    @Column(updatable=false)
     private int ballNo;
-    @Column(updatable=false)
     private int run;
-    @Column(updatable=false)
     private int wicket;
-    @OneToOne
-    @JoinColumn
     private TeamPlayer batsman;
-    @OneToOne
-    @JoinColumn
     private TeamPlayer bowler;
 
     public int getBallNo() {

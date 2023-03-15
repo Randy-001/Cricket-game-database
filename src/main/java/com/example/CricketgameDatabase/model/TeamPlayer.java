@@ -1,32 +1,22 @@
 package com.example.CricketgameDatabase.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.*;
 
-@Entity
+@Document(collection = "TeamPlayer")
 public class TeamPlayer {
+
+    @Transient
+    public final static  String TEAM_PLAYER_SEQUENCE="latsTeamPlayerId";
     @Id
-    @Column(updatable=false,nullable=false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int teamPlayerId;
-    @ManyToOne
-    @JoinColumn
     private Player player;
     private int runs;
     private int wickets;
 
-
-    @Column(name="matchId")
-    private int matchId;
-
-    @ManyToOne
-    @JoinColumn(name="teamPlayer_playing_team_id")
-    private PlayingTeam playingTeam;
-
-
-
-    //@JsonIgnore
     public Player getPlayer() {
         return player;
     }
@@ -59,20 +49,6 @@ public class TeamPlayer {
         this.teamPlayerId = teamPlayerId;
     }
 
-    public int getMatchId() {
-        return matchId;
-    }
-
-    public void setMatchId(int matchId) {
-        this.matchId = matchId;
-    }
-
-    @JsonBackReference
-    public PlayingTeam getPlayingTeam() {
-        return playingTeam;
-    }
-
-    public void setPlayingTeam(PlayingTeam playingTeam) {
-        this.playingTeam = playingTeam;
-    }
 }
+
+

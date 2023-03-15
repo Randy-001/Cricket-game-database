@@ -1,24 +1,26 @@
 package com.example.CricketgameDatabase.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
-import javax.persistence.*;
 import java.util.List;
 
-@Entity
+@Document(collection="Team")
 public class Team {
+
+    @Transient
+    public final static String TEAM_SEQUENCE="lastPlayedTeamId";
+
     @Id
-    @Column(updatable=false,nullable=false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int teamId;
-    @Column(updatable=false)
+
     private String teamName;
-    @Column(updatable=false)
+
     private String coachName;
 
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="teamId")
     private List<Player> players;
 
     public String getTeamName() {

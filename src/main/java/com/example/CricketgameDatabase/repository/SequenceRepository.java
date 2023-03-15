@@ -1,12 +1,9 @@
 package com.example.CricketgameDatabase.repository;
 
-import com.example.CricketgameDatabase.model.Player;
-import org.bson.types.ObjectId;
+import com.example.CricketgameDatabase.model.Sequence;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
-
 @Repository
-public interface PlayerRepository extends MongoRepository<Player,Integer> {
-
+public interface SequenceRepository extends MongoRepository<Sequence,String> {
 }
