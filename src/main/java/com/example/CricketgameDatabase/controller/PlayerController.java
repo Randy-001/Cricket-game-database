@@ -2,6 +2,7 @@ package com.example.CricketgameDatabase.controller;
 
 
 import com.example.CricketgameDatabase.model.Match;
+import com.example.CricketgameDatabase.model.PlayerIdentity;
 import com.example.CricketgameDatabase.model.Team;
 import com.example.CricketgameDatabase.model.TeamPlayer;
 import com.example.CricketgameDatabase.service.TeamplayerService;
@@ -20,7 +21,7 @@ public class PlayerController {
     @Autowired
     private TeamplayerService teamplayerservice;
     @GetMapping("/{id}/match/{matchId}")
-    public TeamPlayer getPlayer(@PathVariable int id, @PathVariable int matchId)
+    public PlayerIdentity getPlayer(@PathVariable int id, @PathVariable int matchId)
     {
         return this.teamplayerservice.findByIdAndMatchId(id,matchId);
     }
